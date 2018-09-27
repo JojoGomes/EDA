@@ -1,5 +1,7 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h> 
+#include <math.h>
+#include <stdlib.h>
 
 void estatistica(int n, int sum, const float numeros[], float &med, float &dpadrao)
 {
