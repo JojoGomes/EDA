@@ -1,6 +1,19 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h> 
 
+void estatistica(int n, int sum, const float numeros[], float &med, float &dpadrao)
+{
+	// variavel local para a soma dos valores do ficheiro
+	int j;
+	// Cálculo da media dos valores
+	med = sum / n;
+	// Ciclo para calcular a soma dos valores do ficheiro para o desvio padrão
+	for (j = 0; j < n; j++)
+		sum += pow(numeros[j] - med,2);
+	// Cálculo do desvio padrao
+	dpadrao = sqrt(sum / n);
+}
+
 int main()
 {
 	FILE *Dados; // Apontador para uma estrutura de um ficheiro  
@@ -9,7 +22,7 @@ int main()
 	int i;
 	float *valores; // Apontador para o Array dinâmico que guarda os valores lidos do ficheiro
 	float min, max; //Variáveis para o valor minimo e máximo dos dados obtidos
-	float soma_total, media; //Valores para o cálculo da média
+	float soma_total, media, desv_padrao; //Valores para o cálculo da média e desvio padrão
 	int nlinhas;  // Nº de dados que o ficheiro contém  
 	int nclasses; // Nº de classes do histograma 
 
@@ -56,9 +69,12 @@ int main()
 
 		//Cálculos para os dados da tabela
 		media = soma_total / nlinhas;
+	
+		//////// Calculo da media e desvio padrao ///////////
+		estatistica(nlinhas, soma_total, valores, media, desv_padrao);
+		printf("Media: %g             ",media);
+		printf("Desvio Padrão: %g\n", desv_padrao);
 
-
-		// C O M P L E T A R  //
 
 
 		delete[] valores; // Libertação da memória ocupada pelo array dinâmico 
